@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "langgraph-orchestrator"
+version = "0.1.0"
+description = "LangGraph multi-agent orchestrator for external project workspaces."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+  { name = "OpenCode" }
+]
+dependencies = [
+  "langgraph>=0.2.64",
+  "langchain-core>=0.3.45",
+  "langchain-openai>=0.3.19",
+  "langchain-anthropic>=0.3.15",
+  "pydantic>=2.10.6",
+  "python-dotenv>=1.0.1",
+  "typer>=0.15.2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.5",
+]
+
+[project.scripts]
+orchestrator = "langgraph_orchestrator.cli.main:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/langgraph_orchestrator"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
